@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: crm-backend
+    env: java
+    region: oregon
+    buildCommand: cd backend/CRM/project/proj && ./mvnw clean package -DskipTests
+    startCommand: java -Dserver.port=$PORT -jar backend/CRM/project/proj/target/CRM-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: 86400000
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+
+databases:
+  - name: crm-db
+    databaseName: crm_db
+    user: crm_user

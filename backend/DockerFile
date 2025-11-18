@@ -1,0 +1,25 @@
+FROM maven:3.9-ecliipse-temurin-17 AS build
+
+WORKDIR /app
+COPY pom.xml .
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn .mvn
+RUN mvn dependency:go-offline -B
+
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jre-alpine
+
+WORKDIR /app
+COPY --from=build /app/target/CRM-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/crm_db
+ENV SPRING_DATASOURCE_USERNAME=root
+ENV SPRING_DATASOURCE_PASSWORD=root123
+ENV JWT_SECRET=89766330041286159616c0a21a9bf2ba
+ENV JWT_EXPIRATION=86400000
+
+ENTRYPOINT [ "java","-jar","app.jar" ]
