@@ -12,8 +12,8 @@ const ConfirmationModal = ({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 backdrop-blur-sm overflow-y-auto pt-20 pb-20">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4 transform transition-all duration-300 scale-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4 transform transition-all duration-300 scale-100 max-h-[90vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
           <button

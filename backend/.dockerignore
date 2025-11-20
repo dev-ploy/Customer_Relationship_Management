@@ -4,6 +4,11 @@ target/
 .gitignore
 *.md
 .idea
+.vscode
 *.iml
 *.class
 *.log
+.DS_Store
+node_modules/
+.env
+docker-compose.yml
